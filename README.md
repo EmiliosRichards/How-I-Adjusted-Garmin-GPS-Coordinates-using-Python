@@ -15,7 +15,7 @@ My most recent focus is an exercise that some may see as burdensome, albeit chal
 
 It is a great watch, and I love the design and features it provides, it has accomplished everything 
 
-with one major exception, the GPS produced perculiar results. It will come at no shock to those who have travelled through the Mediterranean, Baltic, and Middle-Eastern regions that it is no fault of brand or model. The problem I faced stems from a much deeper issue: electronic warfare and our spatial proximity to the Middle-Eastern region. The geopolitical conflict in this area has resulted in GPS and satellite signal disruptions. 
+with one major exception, the GPS produced perculiar results. It will come at no shock to those who have travelled through the Mediterranean, Baltic, and Middle-Eastern regions that it (perculiar results) is no fault of brand or model. The problem I faced stems from a much deeper issue: electronic warfare and our spatial proximity to the Middle-Eastern region. The geopolitical conflict in this area has resulted in GPS and satellite signal disruptions. (many are being affected) and the interference in my GPS coord is one of the many (disruptions) being felt by people. Although this issue is a small compared to many people are currently facing, it still a ery real byproduct of the war. With that being said, I was determined to eleviate the issue and to not let it hinder value I find in taking care of myself. - -
 
 
 geopolitical conflicts, electronic warefare, satellite and gps interference
@@ -29,6 +29,8 @@ This is what the workout data looks like.
 As it turns out, the workout data could be remediated by accessing and adapting the corresponding TCX - Training Center XML - file. My goal was simple, download the xml file and find the affected tackpoints, create data that reflects true to facts coordinates, reupload, enjoy. Simple enough. 
 
 The first step was to create correct route through an online map - this gave me details or all turning points. not a linear run, from one point to the next its straight. 
+
+reversing the data points, (go into what code means and what i used and what i learned)
 
 next interpolation - why i need it, to evenly distrubute along the route -- wont cover now but good to mention another step would be required to create a more correct synergy of metrics (will provide later, pace vs distance calc)-- leads to step 
 
