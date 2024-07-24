@@ -1,36 +1,43 @@
 # XML-Workout-Data-GPS-Interpolation
 
-Welcome! The following document contains the details of a small issue I had and what I did to overcome it. Find out how I used Python to solve an real-world problem related to my Gamrin Multisport GPS Watch and how the implications of the Isreal-Palistine conflict incentivised some deeper learning of 3 Python Libraries. 
+Welcome! The following document contains the details a small project working with XML, Interpolation, and python scripts. Find out how I used Python to solve a real-world problem related to my Gamrin Multisport GPS Watch and how the implications of the Isreal-Palistine conflict incentivised some deeper learning of 3 Python Libraries. 
 
 # Document Contents 
 
-- [**Introduction**](#Introduction): Provides context to the problem. Reveals the requirement for a solution. 
+- [**Introduction**](#Introduction): Provides context to the problem. Reveals the requirements for a solution. 
 
 # Introduction 
 
-To provide some context, since a child I've relished in a variety of sports and as I've grown to become young adult I've maintained that same keen interest, with a my motivation broadening from something i enjoyed to a activity that bringme  shift from having fun to well being and fitness.
+To provide some context, since a child I've relished in a variety of sports and as I've grown to become young adult I've maintained that same keen interest, over the years what started out as an enjoyable pass-time, expanded to become a core value contributing to my wellbeing and health. My most recent focus is an exercise that some may see as burdensome, albeit challenging at times I see it as an escape from the hustle and bustle of life, its a simple workout that I can only regard as a classic, that is, the art of running. It's a form birthed at childhood that we all know too well, its beauty lies in its simplicity and with it being one of our most natural movements, it's needless to say running is among the best investments one can make for their body and mind. As with most of my hobbies, I found great joy in quantifying my progress and seeking ways to improve my ability level. Heartrate and Distance were metrics I soon began to observe. This was made easy by utilizing Garmin's Fenix Multisport GPS watch and their accompanying platform Garmin Connect. The Fenix encompasses a broad range of features and capabilities for measuring essential workout metrics, including Heart-Rate Monitoring, GPS tracking, recovery insights and much more. Garmin connect on the other hand, is a platform that can hold your data, allowing a holistic overwiew of progress through an intuituve interface, its main usage include: visualising the geographical rounts taken, and valuable insights facilitated by readily available workout statistics.
+
+It is a great watch and I love the ergonomical design, however there was a giant issue that I soon encountered. The GPS produced perculiar results, not only was the map visual misaligned, the distance metric was rendered useless. Was something wrong with the Garmin Watch? No. It will come at no shock to those who have travelled through the Mediterranean, Baltic, and Middle-Eastern regions that these results are no fault of brand or model. The problem I faced stems from a much deeper issue: electronic warfare and our spatial proximity to the Middle-Eastern region. The geopolitical conflict in this area has resulted in GPS and satellite signal disruptions. Many areas of life are being affected, to list a few: flight navigation and air traffic control, delays in emergency serives such as ambulances, police and fire-services, these are all underpinned by the finacial impact and psycological strain. I bring forward my experience not to diminish that of what is going on around us, but instead to bring light to a comparitively small, yet very real conscequence of the ongoing conflict. With that being said, I was all the more determined to reconcile the problem I was facing. 
+
+geopolitical conflicts, electronic warefare, satellite and gps interference -- the interference in my GPS coord is one of the many (disruptions) being felt by people. Although this issue is a small compared to many people are currently facing, it still a ery real byproduct of the war. With that being said,
+
+## Initial problem solving
+
+Due to the GPS interference, the incorrect coordinates it produced had serveral implications; First, an inaccuracy of distance, Example: A 10k run may show up as 7k or at times even 0.7k. Second, skewed variables renders Garmin Connect and gaining insights through it, ineffective; accumulated data and fitness progression, non-existant. Lastly the maps look choatic, much like if you employed a toddler to draw their finest scribble on a map, therefore debilitating ones aptitude to visualise their run in the intended manner. The final issue may be the least impactful of the three, yet in my heart, solving it was of paramount importance.
 
 
-My most recent focus is an exercise that some may see as burdensome, albeit challenging at times I see it as an escape from the hustle and bustle of life, its a simple workout that I can only regard as a classic, that is, the art of running. It's a form birthed at childhood that we all know too well, its beauty lays in its simplicity and due to it being one of our most natural movements, it's needless to say running is one of the best investments for your mind and body. As with most of my hobbies, I found great joy in quantifying my progress and seeking ways to improve my ability level. Heartrate and Distance were metrics I soon began to observe. By utilising Garmin's Fenix Multisport GPS watch and their accompanying platform Garmin Connect, I have been able to . The Fenix encompasses a broad range of features and capabilities, including Heart-Rate Monitoring, GPS tracking, and . through Garmin connect, workout data - Mapping the rounts taken during a run.
+Thought process No1
 
-It is a great watch, and I love the design and features it provides, it has accomplished everything 
-
-with one major exception, the GPS produced perculiar results. It will come at no shock to those who have travelled through the Mediterranean, Baltic, and Middle-Eastern regions that it (perculiar results) is no fault of brand or model. The problem I faced stems from a much deeper issue: electronic warfare and our spatial proximity to the Middle-Eastern region. The geopolitical conflict in this area has resulted in GPS and satellite signal disruptions. (many are being affected) and the interference in my GPS coord is one of the many (disruptions) being felt by people. Although this issue is a small compared to many people are currently facing, it still a ery real byproduct of the war. With that being said, I was determined to eleviate the issue and to not let it hinder value I find in taking care of myself. - -
-
-
-geopolitical conflicts, electronic warefare, satellite and gps interference
-
-Due to the GPS interference, the incorrect coordinates it produced had serveral implications; First, an inaccuracy of distance, : Example meant that a 10k run may show up as 7k or at times even 0.7k. Second -- Gaining insights into the run, accumulated data, and progression of fitness metrics. third -- the maps look silly, and I cant visualise my runs in the inrtended manner. 
-
-can i manually change the coords to fix all these issues? Adjusting this using the garmin or similar programs prooved exceedingly difficult if not impossible, with the knowledge that garmin stores their data in a tcx file (a type of xml) repairing this deta in the source file manually seemed to be the most viable option, but with 1000s of data points to adjust doing this line by line would be tedious and big word. Insert python. 
+Can I manually change the adjust the map, in a drag and drop fashion - similiar to https://onthegomap.com/#/create 's 'how far did I run?' - to fix all these issues? Adjusting this using the garmin or similar programs prooved exceedingly difficult if not impossible. Searching  with the knowledge that garmin stores their data in a tcx file (a type of xml) repairing this deta in the source file manually seemed to be the most viable option, but with 1000s of data points to adjust doing this line by line would be tedious and big word. Insert python. 
 
 This is what the workout data looks like. 
 
 As it turns out, the workout data could be remediated by accessing and adapting the corresponding TCX - Training Center XML - file. My goal was simple, download the xml file and find the affected tackpoints, create data that reflects true to facts coordinates, reupload, enjoy. Simple enough. 
 
+
+
+
+
 The first step was to create correct route through an online map - this gave me details or all turning points. not a linear run, from one point to the next its straight. 
 
 reversing the data points, (go into what code means and what i used and what i learned)
+
+
+
+
 
 next interpolation - why i need it, to evenly distrubute along the route -- wont cover now but good to mention another step would be required to create a more correct synergy of metrics (will provide later, pace vs distance calc)-- leads to step 
 
@@ -38,11 +45,27 @@ The second step involves calculating the number of coordinates needed in order t
 
 code for interpolation 
 
+
+
+
 calculating distance 
+
+
+
+
 
 parse and replace file 
 
+
+
+
+
+
 maintaining header and format
+
+
+
+
 
 
 limitations + 
