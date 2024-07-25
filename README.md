@@ -1,4 +1,4 @@
-# XML-Workout-Data-GPS-Interpolation
+# How I Adjusted Garmin GPS Coordinates using Python
 
 Welcome! The following document contains the details a small project working with XML, Interpolation, and python scripts. Find out how I used Python to solve a real-world problem related to my Gamrin Multisport GPS Watch and how the implications of the Isreal-Palistine conflict incentivised some deeper learning of 3 Python Libraries. 
 
@@ -16,32 +16,82 @@ geopolitical conflicts, electronic warefare, satellite and gps interference -- t
 
 ## Initial problem solving
 
-Due to the GPS interference, the incorrect coordinates it produced had serveral implications; First, an inaccuracy of distance, Example: A 10k run may show up as 7k or at times even 0.7k. Second, skewed variables renders Garmin Connect and gaining insights through it, ineffective; accumulated data and fitness progression, non-existant. Lastly the maps look choatic, much like if you employed a toddler to draw their finest scribble on a map, therefore debilitating ones aptitude to visualise their run in the intended manner. The final issue may be the least impactful of the three, yet in my heart, solving it was of paramount importance.
+Due to the GPS interference, the incorrect coordinates it produced had serveral implications; 
+
+1) First, an inaccuracy of distance, Example: A 10k run may show up as 7k or at times even 0.7k. 
+
+2) Second, skewed variables rendered Garmin Connect and gaining insights through it, ineffective; and the accumulated data that leads to fitness progression insight, virtually non-existant. 
+
+3) Lastly the maps looked choatic, much like if you employed a toddler to draw their finest scribble on a map, this debilitates ones aptitude to visualise their run in the intended manner. 
+
+Now being unable to view a map of the route taken in your run admittedly is annoying, but of the three issues, you might say it falls last in priority. If so you are probably right, however at the time of conducting this project I was still baring the afterglow of a beautiful morning run, edorphins and adreneline were running through my vains, logic had taken a backseat, the lack of a simple yet playful visual of my overhead route was not just an inconvenience, it was a cry for help! Determined to be deprived no longer, I fired up my laptop, opened my IDE, and got to work, Issue 3 was of paramount importance.
 
 
 Thought process No1
 
-Can I manually change the adjust the map, in a drag and drop fashion - similiar to https://onthegomap.com/#/create 's 'how far did I run?' - to fix all these issues? Adjusting this using the garmin or similar programs prooved exceedingly difficult if not impossible. Searching  with the knowledge that garmin stores their data in a tcx file (a type of xml) repairing this deta in the source file manually seemed to be the most viable option, but with 1000s of data points to adjust doing this line by line would be tedious and big word. Insert python. 
+Can I manually change the adjust the map, in a drag and drop fashion - similiar to https://onthegomap.com/#/create 's 'how far did I run?' - to fix all these issues? Adjusting the coordinates in this way is not supported by garmin directly, I even attempted to use Golden Cheetah with no success. Effort to resolve the issue in this way did not go to waste, as it was through the process of downloading the workout data from garmin - in order to upload it to the Golden Cheeter application - that I discovered Garmin's XML equivalent TCX (Training Center XML). 
 
-This is what the workout data looks like. 
+Available File Formats: ![downloadtcx](Files/downloadtcx.png)
 
-As it turns out, the workout data could be remediated by accessing and adapting the corresponding TCX - Training Center XML - file. My goal was simple, download the xml file and find the affected tackpoints, create data that reflects true to facts coordinates, reupload, enjoy. Simple enough. 
+I knew I could easily enough go into the file, plug in the right coordinates, and re-upload the file to garmin, but there were 1000s of records to change. But, I had a great idea! A Python script could make short work of the repititious task. 
 
+// Searching  with the knowledge that garmin stores their data in a tcx file (a type of xml) repairing this deta in the source file manually seemed to be the most viable option, but with 1000s of data points to adjust doing this line by line would be tedious and big word. Insert python. 
 
-
-
-
-The first step was to create correct route through an online map - this gave me details or all turning points. not a linear run, from one point to the next its straight. 
-
-reversing the data points, (go into what code means and what i used and what i learned)
+// As it turns out, the workout data could be remediated by accessing and adapting the corresponding TCX - Training Center XML - file. My goal was simple, download the xml file and find the affected tackpoints, create data that reflects true to facts coordinates, reupload, enjoy. Simple enough. 
 
 
 
 
+To give you an idea of what the file looks like, here is as snippet: 
 
-next interpolation - why i need it, to evenly distrubute along the route -- wont cover now but good to mention another step would be required to create a more correct synergy of metrics (will provide later, pace vs distance calc)-- leads to step 
+![TCX Example](Files/tcxexample.png)
 
-The second step involves calculating the number of coordinates needed in order to manually replace coordinates 
+
+Before moving onto the main script, I needed to prepare the replacement data. This meant finding the coordinates of my run. For this I used https://www.gpsvisualizer.com/draw/
+
+![gpsvisualiser](Files/gpsvisualiser.png)
+
+This is an example of what some of the downloaded cordinates look like:
+
+![Coordinates](Files/Coordinates.png)
+
+As distinct from a circular route, the run followed what you wouuld call an out-and-back route, starting from a desired location, travelling to a midway checkpoint, followed by retracing your steps and eventually finishing where you started. Therefore my data points only represented half of the route and I had to add a reversed set of the coordinates to the end. To save time I used this:                  (go into what code means and what i used and what i learned)
+
+![Out and Back Data Reversing py File](src/outandback-reverse.py)
+
+```python
+# Define input and output file names
+input_file = 'input.txt'
+output_file = 'output_combined.txt'
+
+# Read the input file with tabs as delimiter
+with open(input_file, 'r', newline='') as infile:
+    reader = csv.DictReader(infile, delimiter='\t')
+    rows = list(reader)  # Convert to a list to enable processing
+
+# Reverse the order of the rows and combine with the original list
+reversed_rows = rows[::-1]
+combined_rows = rows + reversed_rows
+
+# Write the combined rows to the output file
+with open(output_file, 'w', newline='') as outfile:
+    writer = csv.DictWriter(outfile, fieldnames=reader.fieldnames, delimiter='\t')
+    writer.writeheader()  
+    writer.writerows(combined_rows) 
+
+print(f"Combined original and reversed records written to {output_file}")
+```
+
+
+With my Out and Back Coordinates saved in a handy Tab-Separated-Value file I was almost ready to start replacing my TCX File coordinates. 
+
+However there was one small discrepency. When plannning my route and extracting the corrected cordinates, I simply droped markers at every turning point and took little notice to the distances between each marker, additionally the total number of paired Latitude and Longitude coordinates - including the reversed set - amounted to 87. The discrepency appears once you consider that during a workout a Garmin watch records data every second, with each second represented as a single Trackpoint within a TCX file. In consequence a thirty minute workout produces 1800 Trackpoints. Since each trackpoint contains metrics like Distance, Latitude, and Longitude; and every Trackpoint needed modification, I had to interpolate my 87 coordinates. 
+
+///Could explain the interpolation and spreading between equal distances +  wont cover now but good to mention another step would be required to create a more correct synergy of metrics (will provide later, pace vs distance calc)-- 
+
+To view the Python script I used to calculate the number of Trackpoints within a TCX (right click to open in new tab): [Count Trackpoints Code](src/count-trackpoints.py)
+
+
 
 code for interpolation 
 
