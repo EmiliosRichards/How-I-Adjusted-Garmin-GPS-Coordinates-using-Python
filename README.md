@@ -5,6 +5,19 @@ Welcome! The following document contains the details a small project working wit
 # Document Contents 
 
 - [**Introduction**](#Introduction): Provides context to the problem. Reveals the requirements for a solution. 
+- [**Initial Problem Solving**](#initial-problem-solving): Describes the GPS interference issues and their implications on running metrics.
+- [**Thought Process No1: Explores**](#thought-process-no1) the initial idea of manually adjusting maps and introduces Garmin's TCX file format.
+- [**Thought Process No2**](#thought-process-no2): Shifts focus to automating the correction process using a Python script.
+- [**Creating Replacement Data**](#creating-replacement-data): Details the process of preparing new coordinates using GPS Visualizer.
+- [**Automated Coordinate Generator**](#automated-coordinate-generator): Discusses generating and combining coordinates using Python.
+- [**A Mismatch in Data Points**](#a-mismatch-in-data-points): Explains the discrepancy between generated and recorded data points and the need for interpolation.
+- [**Interpolation**](#interpolation): Outlines the process of interpolating the new coordinates to match the recorded trackpoints.
+- [**Parse and Replace**](#parse-and-replace): Covers parsing the TCX file and replacing coordinates using Python.
+- [**Final Product**](#final-product): Shows the successful upload and visualization of the corrected TCX file.
+- [**Limitations**](#limitations): Discusses the limitations of the current solution and potential improvements.
+- [**Summary**](#summary): Summarizes the project, its outcomes, and personal learnings.
+- [**Future Work**](#future-work): Proposes future enhancements and new project ideas.
+- [**Conclusion**](#conclusion): Concludes the document and invites feedback and contact.
 
 # Introduction 
 
@@ -186,12 +199,7 @@ Although this is a decent work around for GPS disruptions affecting Garmin measu
 
 ## Summary 
 
-From what started out as a poor endorsememt unjustly sewn against Garmin products (I still love their watches), to conflict driven ripple-affect felt globaly, this small project provided an opportunity for deeper learning. By utilising libraries: geopy, pandas, and lxml; this system provides a viable solution to a real-life problem. We created new data, resampling it to the desired sum total and appropriately formatting; next we modified an existing TCX file, adapting several data points using our new data; the end result produced a accurate rendering of the workout activity, hosted on Garmin Connect. The process of creating such a system also demonstrates the versitility of python and its supporting libraries, viable for numerous tasks and processes. My personal growth manifests itself in deeper understanding of XLM files, GPS coodinates + supporting library geopy, and resampling methods. Going forward, whether facing industry specific or personal obstacles, I hope this project serves as a reminder to myself and similiar others that Python has great potential for improving workflows and everyday life. 
-
-
-## Conclusion
-
-Thank you for reading this document! It was an enjoyable experience creating this system, I hope you can take away some value from it. I learnt a lot from the process, so at I least hope it encourages you to try coding something new. If you do, share it with me! Lastly, any feedback is welcome, my contacts are below. Thank you again and I will see you guys in the next one! Have a great weekend!
+From what started out as a poor endorsememt unjustly made against Garmin products (I still love their watches), to a conflict driven ripple-affect felt globaly, this small project provided an opportunity for deeper learning. By utilising libraries: geopy, pandas, and lxml; this system provides a viable solution to a real-life problem. We created new data, resampling it to the desired sum total and appropriately formatting; next we modified an existing TCX file, adapting several data points using our new data; the end result produced a accurate rendering of the workout activity, hosted on Garmin Connect. The process of creating such a system also demonstrates the versitility of python and its supporting libraries, viable for numerous tasks and processes. My personal growth manifests itself in deeper understanding of XLM files, GPS coodinates + supporting library geopy, and resampling methods. Going forward, whether facing industry specific or personal obstacles, I hope this project serves as a reminder to myself and similiar others that Python has great potential for improving workflows and everyday life. 
 
 
 ## Future Work
@@ -204,6 +212,11 @@ Develop an adaptive algorithm that dynamically adjusts interpolation based on pa
 
 2) Machine Learning for GPS Anomaly Correction:
 Integrate machine learning techniques to predict and correct GPS anomalies, offering a more robust solution for accurate race tracking.
+
+
+## Conclusion
+
+Thank you for reading this document! It was an enjoyable experience creating this system, I hope you can take away some value from it. I learnt a lot from the process, so at I least hope it encourages you to try coding something new. If you do, share it with me! Lastly, any feedback is welcome, my contacts are below. Thank you again and I will see you guys in the next one! Have a great weekend!
 
 ### Licence
 
