@@ -22,7 +22,7 @@ coords = list(zip(data['latitude'], data['longitude']))
 total_distance = calculate_total_distance(coords)
 print(f"Total distance: {total_distance} meters")
 
-# Resample the data to 288 points
+# Resample the data to total trackpoints
 def resample_coordinates(coords, num_points):
     cumulative_distances = [0.0]
     for i in range(1, len(coords)):
@@ -54,7 +54,7 @@ def format_coordinates(coords, decimal_places, for_dist):
         formatted_coords.append((formatted_lat, formatted_lon, formatted_dist))
     return formatted_coords
 
-resampled_coords = resample_coordinates(coords, 288)
+resampled_coords = resample_coordinates(coords, 1800)
 
 # Format the resampled coordinates to 7 decimal places
 formatted_coords = format_coordinates(resampled_coords, 15, 14)

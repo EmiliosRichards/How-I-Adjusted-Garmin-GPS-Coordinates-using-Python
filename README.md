@@ -91,34 +91,85 @@ However there was one small discrepency. When plannning my route and extracting 
 
 To view the Python script I used to calculate the number of Trackpoints within a TCX (right click to open in new tab): [Count Trackpoints Code](src/count-trackpoints.py)
 
+This is the python script I used to interpolate the newly generated precise coordinates - to a equal the sum total trackpoints measured in the previous step - and to ensure they are equally spaced. ![Data-Interpolation](src/data-interpolation.py)
+
+During this step the geodesic module from the library geopy.distance was used to calculate distances. Here is a higher-level overview of the script:
+
+```python 
+import pandas as pd
+import numpy as np
+from geopy.distance import geodesic
+from pathlib import Path
+
+# Below are the functions that were defined. 
+
+# Calculate the total distance traveled.
+def calculate_total_distance(coords):
+
+# Resample the data to total trackpoints, equally spaced apart.
+def resample_coordinates(coords, num_points):
+
+# Format the coordinates to the specified number of decimal places. Important for reliability.
+def format_coordinates(coords, decimal_places, for_dist):
 
 
-code for interpolation 
+# Below we run the functions with our desired inputs.
+
+# Resample coordinates to total trackpoints
+resampled_coords = resample_coordinates(coords, 1800)
+
+# Format the resampled coordinates to 7 decimal places
+formatted_coords = format_coordinates(resampled_coords, 15, 14)
+
+# Save the resampled coordinates to a new file
+resampled_data = pd.DataFrame(formatted_coords, columns=['latitude', 'longitude', 'distance_meters'])
+resampled_data.to_csv(folder / 'resampled_coordinates.txt', index=False, sep='\t')
+```
+
+At this point, I have my /Data/resampled_coordinates.txt file - a TSV file containing 1800 equally distanced coordinates - accurately representing my morning-run. 
+
+All I had to do, was parse the original TCX file and replace each Latitude, Longitude, and DistanceMeters variable. 
+
+To acheive this, I used the following Python code: ![Parse and Replace](src/parse-and-replace.py)
+
+To provide a short summary what takes place during the script, here is a higher-level overview:
+
+```python
+# Import Libaries***
+
+# Load the resampled coordinates***
+
+# Parse the TCX file
+tcx_file_path = Path('tcx') / 'activity_16486638003.tcx'
+tree = ET.parse(tcx_file_path)
+root = tree.getroot()
+
+# Define namespaces
+namespaces = {
+    'tcx': 'http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2'
+}
+# Find all Trackpoints
+trackpoints = root.findall('.//tcx:Trackpoint', namespaces)
+
+# Replace latitude, longitude, and distance values
+for i, trackpoint in enumerate(trackpoints):
+    # code continues
+
+# Save the modified TCX file
+modified_tcx_file_path = tcx_file_path = Path('tcx') / 'modified_file.tcx'
+
+# Maintain TCX format identical to original. Ensures the file is supported by Garmin Connect
+tree.write(modified_tcx_file_path, xml_declaration=True, encoding='UTF-8', pretty_print=True)
+```
+
+With that, our newly created TCX file - /tcx/modified_file.tcx - is ready to be uploaded to Garmin Connect!
+
+The Result:
+
+![Final Run](Files/FinalRun.png)
 
 
-
-
-calculating distance 
-
-
-
-
-
-parse and replace file 
-
-
-
-
-
-
-maintaining header and format
-
-
-
-
-
-
-limitations + 
+## Limitations
 
 manuual workaround 
 
@@ -159,7 +210,7 @@ New Project Ideas
 
 ### Licence
 
-This project is licensed under the MIT License - see the [LICENSE]([https://github.com/EmiliosRichards/File-Management-System/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License - see the ![LICENSE](/LICENSE) file for details.
 
 ### Contact Information
 
