@@ -25,7 +25,7 @@ Due to the GPS interference, the incorrect coordinates it produced had serveral 
 
 Heres an example: 
 
-![Map-Example](stravaexample.png)
+![Map-Example](/Files/stravaexample.png)
 
 Being unable to view a map of the route taken in your run admittedly is annoying, but of the three issues at hand, you may say it falls last in priority. If that is the case, I agree with you, however at the time of conducting this project, I was baring the afterglow of a beautiful morning run, edorphins and adreneline were pumping through my vains, logic had taken the backseat, the lack of a simple yet playful visual displaying my overhead route was not just an inconvenience, it was a cry for help! Determined to be deprived no longer, I fired up my laptop, opened my IDE, and got to work, to me issue 3 was of paramount importance.
 
