@@ -23,44 +23,36 @@ Welcome! The following document details of a small project working with XML, Int
 
 To provide some context, from childhood I've relished participating in a variety of sports and I've maintained that same keen interest throughout my life. Over the years, what began as an enjoyable hobby, developed into one of my core values. My most recent focus is running. Some may see running as burdensome, and albeit challenging for me at times, I see it as an healthy escape from the hustle and bustle of life. The art of running is a classic. As a child, running comes naturally, its beauty lies in its simplicity. By putting one foot in front of the other, we experience one our most natural movements. Running is among the best investments one can make for their body and mind. As with most of my hobbies, I found great satisfaction in quantifying my progress and seeking ways to improve my ability level. Heartrate and Distance were metrics I soon began to observe. This was made easy by utilizing Garmin's Fenix Multisport GPS watch and their accompanying platform Garmin Connect. The Fenix encompasses a broad range of features and capabilities, all aimed at measuring essential workout metrics, including Heart-Rate Monitoring, GPS tracking, recovery insights and much more. Garmin Connect on the other hand, is a platform capable for holding data and providing a holistic overview of progress through an intuituve interface. Its main uses include visualising the geographical rounts taken and gaining valuable insight through workout monitoring.
 
-The Garmin Fenix is a great watch and I love the ergonomical design, however there was a giant issue that I soon encountered. The GPS feature produced perculiar results. Not only was the map visual misaligned, the distance metric was incorrect. Was there something wrong with the Garmin Watch? No, but I wasn't suprised. Those of you who have travelled through the Mediterranean, Baltic, and Middle-Eastern regions may have experienced something similar. It will come at no shock that the GPS discrepencies are no fault of brand or model. The problem stems from a much deeper issue: electronic warfare and our spatial proximity to the Middle-Eastern region. The geopolitical conflict in this area has resulted in GPS and satellite signal disruptions and many areas of life are being affected. To outline a few: flight navigation and air traffic control have reverted to traditional navigation methods. This costs them time and money. Delays are also being experienced by emergency serives such as Ambulances, Police and Fire-Services. These are all underpinned by the finacial impact and psycological strain being caused to relevent industries and public confidence. I bring forward my experience within this document not to diminish that of what is going on around us, but instead to bring light to a comparitively small, yet very real conscequence of the ongoing conflict. With that being said, I was determined to reconcile the problem I was facing. 
+The Garmin Fenix is a great watch and I love the ergonomical design, however there was a giant issue that I soon encountered. The GPS feature produced perculiar results. Not only was the map visual misaligned, the distance metric was incorrect. Was there something wrong with the Garmin Watch? No, but I wasn't suprised. If you live Cyprus, as I do, or have travelled through the Mediterranean, Baltic, and Middle-Eastern regions recently, you may have experienced something similar. It will come at no shock that the GPS discrepencies are no fault of brand or model. The problem stems from a much deeper issue: electronic warfare and our spatial proximity to the Middle-Eastern region. The geopolitical conflict in this area has resulted in GPS and satellite signal disruptions and many areas of life are being affected. To outline a few: flight navigation and air traffic control have reverted to traditional navigation methods. This costs them time and money. Delays are also being experienced by emergency serives such as Ambulances, Police and Fire-Services. For the general public, popular navigation methods such as Google Maps are suffering. This causes finacial implication to relevent industries and psycological strain to the general public. I bring forward my experience within this document not to diminish what is going on around us, but instead to bring light to a comparitively small, yet very real conscequence of the ongoing conflict. With that being said, I was determined to reconcile the problem I was facing. 
 
-costing time and money
-
-## Initial problem solving
+## Initial Problem Solving
 
 Due to the GPS interference, the incorrect coordinates it produced had serveral implications; 
 
-1) First, an inaccuracy of distance, Example: A 10k run may show up as 7k or at times even 0.7k. 
+1) An inaccuracy of distance; for example - A 10k run may show up as 7k or at times even 0.7k. 
 
-2) Second, skewed variables rendered Garmin Connect and gaining insights through it, ineffective; and the accumulated data that leads to fitness progression insight, virtually non-existant. 
+2) The skewed variables rendered the insights gained through Garmin Connect ineffective and therefore the accumulated data that aids ones progress was non-existant. 
 
-3) Lastly the maps looked choatic, much like if you employed a toddler to draw their finest scribble on a map, this debilitates ones aptitude to visualise their run in the intended manner. 
+3) The maps looked choatic, much like if you employed a toddler to draw their finest scribble on a map.
 
-Heres an example: 
+Here's an example of my first run with the Garmin Fenix: 
 
 ![Map-Example](/Files/stravaexample.png)
 
-Being unable to view a map of the route taken in your run admittedly is annoying, but of the three issues at hand, you may say it falls last in priority. If that is the case, I agree with you, however at the time of conducting this project, I was baring the afterglow of a beautiful morning run, edorphins and adreneline were pumping through my vains, logic had taken the backseat, the lack of a simple yet playful visual displaying my overhead route was not just an inconvenience, it was a cry for help! Determined to be deprived no longer, I fired up my laptop, opened my IDE, and got to work, to me issue 3 was of paramount importance.
+Being unable to view the route you ran is admittedly annoying. But, of the three problems at hand, it is probably last in priority. However this project was prompted by a beautiful morning run that I could not see on Garmin Connect. Edorphins and adreneline were pumping through my vains, logic had taken the backseat and the lack of a simple yet playful map displaying my route was not just an inconvenience, it was a cry for help! In need of a satisfying visual I fired up my laptop, opened my IDE, and got to work. To me, issue 3 was of paramount importance.
 
 
-## Thought process No1
+## Thought process No.1
 
-Can I manually adjust the map, in a drag and drop fashion - similiar to https://onthegomap.com/#/create 's 'how far did I run?' - to fix all these issues? Unfortunatly adjusting the coordinates in this way, is not supported by garmin directly, I even attempted to use Golden Cheetah with no success. Yet effort to resolve my issue in this way did not go to waste, as it was through the process of downloading the workout data from garmin - in order to upload it to the Golden Cheeter application - that I discovered Garmin's XML equivalent file type, TCX (Training Center XML). 
+Can I manually adjust the map, in a drag and drop fashion - similiar to https://onthegomap.com/#/create's "How far did I run?" - to fix all these issues? Unfortunately adjusting the coordinates in this way is not supported by Garmin directly, I also attempted to use Golden Cheetah but with no success. Yet effort to resolve my issue in this way did not go to waste, as it was through the process of downloading workout data from Garmin - in order to upload it to the Golden Cheetah application - that I discovered Garmin's XML equivalent file type, TCX (Training Center XML). 
 
-Garmins Available File Formats for Download: 
+Garmin's Available File Formats for Download: 
 
 ![downloadtcx](Files/downloadtcx.png)
 
-## Thought Process No2
+## Thought Process No.2
 
-My new goal was simple, download the xml file and find the affected data points, create data that reflects the corrected coordinates, re-upload. Simple enough? It then dawned on me, with 1000s of data points to adjust, doing this line by line would be tedious and not worth the effort. But, I had a great idea! A Python script could make short work of the repititious task. 
-
-// I knew I could easily enough go into the file, plug in the right coordinates, and re-upload the file to garmin, I just had to adapt there were 1000s of records to change. But, I had a great idea! A Python script could make short work of the repititious task. 
-
-// Searching  with the knowledge that garmin stores their data in a tcx file (a type of xml) repairing this deta in the source file manually seemed to be the most viable option, but with 1000s of data points to adjust doing this line by line would be tedious and big word. Insert python. 
-
-// As it turns out, the workout data could be remediated by accessing and adapting the corresponding TCX - Training Center XML - file. My goal was simple, download the xml file and find the affected tackpoints, create data that reflects true to facts coordinates, reupload, enjoy. Simple enough. 
+My new goal was simple: 1) Download the XML file and locate the affected data points, 2) create data that reflects the corrected coordinates, 3) re-upload. It sounded simple enough. Then it dawned on me, with 1000's of data points to modify, doing this line by line would be tedious and not worth the effort. But, I had a great idea! A Python script could make short work of this repetitive task. 
 
 
 To give you an idea of what the file looks like, here is as snippet: 
@@ -69,7 +61,7 @@ To give you an idea of what the file looks like, here is as snippet:
 
 ## Creating Replacement Data
 
-Before moving onto the main script, I needed to prepare the replacement data. This meant finding the coordinates of my run. For this I used https://www.gpsvisualizer.com/draw/, dropping pins at the disired location was quick and easy, after that, the corresponding coordinates could be saved to a txt file.
+Before moving onto the main script, I needed to prepare the replacement data. This meant finding the coordinates of my run. For this I used https://www.gpsvisualizer.com/draw/. Dropping pins at the desired location was quick and easy. The corresponding coordinates could be saved to a TXT file.
 
 Here is an example of me dropping some pins:
 ![gpsvisualiser](Files/gpsvisualiser.png)
@@ -79,7 +71,7 @@ This is an example of what some of the downloaded cordinates look like:
 
 ## Automated Coordinate Generator
 
-As distinct from a circular route, the run followed what you wouuld call an out-and-back route, starting from a desired location, travelling to a midway checkpoint, followed by retracing your steps and eventually finishing where you started. Therefore my data points only represented half of the route and I had to add a reversed set of the coordinates to the end. To save time I used python. To view the code in its entirety click - or right click to open tab - the following link: ![Out and Back Data Reversing py File](src/outandback-reverse.py)
+As distinct from a circular route, the run followed what you wouuld call an out-and-back route, starting from a desired location, travelling to a midway checkpoint, followed by retracing your steps and eventually finishing where you started. Therefore my data points only represented half of the route and I had to add a reversed set of the coordinates to the end. To save time I used python. To view the code in its entirety click - or right click to open tab - the following link: [Out and Back Data Reversing py File](src/outandback-reverse.py)
 
 The following is a Portion of the File with Narritive Comments:
 
