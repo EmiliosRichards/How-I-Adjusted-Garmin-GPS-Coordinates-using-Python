@@ -35,6 +35,7 @@ Being unable to view a map of the route taken in your run admittedly is annoying
 Can I manually adjust the map, in a drag and drop fashion - similiar to https://onthegomap.com/#/create 's 'how far did I run?' - to fix all these issues? Unfortunatly adjusting the coordinates in this way, is not supported by garmin directly, I even attempted to use Golden Cheetah with no success. Yet effort to resolve my issue in this way did not go to waste, as it was through the process of downloading the workout data from garmin - in order to upload it to the Golden Cheeter application - that I discovered Garmin's XML equivalent file type, TCX (Training Center XML). 
 
 Garmins Available File Formats for Download: 
+
 ![downloadtcx](Files/downloadtcx.png)
 
 ## Thought Process No2
@@ -127,7 +128,7 @@ def format_coordinates(coords, decimal_places, for_dist):
 # Resample coordinates to total trackpoints
 resampled_coords = resample_coordinates(coords, 1800)
 
-# Format the resampled coordinates to 7 decimal places
+# Format the resampled coordinates to 7 decimal places. This maintains Garmins Standard.
 formatted_coords = format_coordinates(resampled_coords, 15, 14)
 
 # Save the resampled coordinates to a new file
@@ -172,50 +173,37 @@ tree.write(modified_tcx_file_path, xml_declaration=True, encoding='UTF-8', prett
 
 ## Final Product
 
-With the implementation of the previous, my newly created TCX file - /tcx/modified_file.tcx - was ready to be uploaded to Garmin Connect!
+With the implementation of the previous step, my newly created TCX file - /tcx/modified_file.tcx - was ready to be uploaded to Garmin Connect!
 
-The Result:
+Here is the Result:
 ![Final Run](Files/FinalRun.png)
 
 
 ## Limitations
 
-manuual workaround 
-
-using pace, + non gps run + 
+Although this is a decent work around for GPS disruptions affecting Garmin measurements, I thought it was best to mention that this is by no means a perfect solution. When inerpolating our new coordinates I casually brushed past the fact that this system equally spaces the distance of each data point. No race is run at an invariable pace, therefore the various metrics can not perfectly align with its corresponding location perfectly. There are ways of eliminating inconsitences however, such as using checkpoints to compartmentilise (segment?) the followed course, or using Garmin's non-GPS in built distance and pace measurements to calculate distances, providing a far more realistic distrubution. This will be discussed further in the future work section, aimed at improving the accuracy of this system. 
 
 
+## Summary 
 
-Implementation Details
-
-Provide a high-level overview of your final solution.
-Focus on key parts of the code and their functions.
-Explain any important decisions or trade-offs you made.
-
-Maybe a tree or graph showing overall process
+From what started out as a poor endorsememt unjustly sewn against Garmin products (I still love their watches), to conflict driven ripple-affect felt globaly, this small project provided an opportunity for deeper learning. By utilising libraries: geopy, pandas, and lxml; this system provides a viable solution to a real-life problem. We created new data, resampling it to the desired sum total and appropriately formatting; next we modified an existing TCX file, adapting several data points using our new data; the end result produced a accurate rendering of the workout activity, hosted on Garmin Connect. The process of creating such a system also demonstrates the versitility of python and its supporting libraries, viable for numerous tasks and processes. My personal growth manifests itself in deeper understanding of XLM files, GPS coodinates + supporting library geopy, and resampling methods. Going forward, whether facing industry specific or personal obstacles, I hope this project serves as a reminder to myself and similiar others that Python has great potential for improving workflows and everyday life. 
 
 
+## Conclusion
 
+Thank you for reading this document! It was an enjoyable experience creating this system, I hope you can take away some value from it. I learnt a lot from the process, so at I least hope it encourages you to try coding something new. If you do, share it with me! Lastly, any feedback is welcome, my contacts are below. Thank you again and I will see you guys in the next one! Have a great weekend!
 
-
-
-i hope this shows the usefulness of python and libraries 
-
-
-Outcome and Reflection
-
-Summarize the outcome of your project.
-Reflect on what you learned and how you grew from the experience.
-Mention how this experience has prepared you for future projects.
-
-Conclusion
-Wrap up with a final thought or takeaway message.
-End on a positive note, reinforcing the value of the experience.
 
 ## Future Work
-Enhancements
-New Project Ideas
-### Research Opportunities
+
+To enhance the accuracy of the system and address the limitations mentioned, future work will focus on implementing several key improvements. One such enhancement is the incorporation of checkpoints to segment the course, which will help mitigate inconsistencies by providing more precise reference points. Additionally, leveraging Garmin's non-GPS built-in distance and pace measurements will allow for a more realistic distribution of data points, aligning better with the actual run dynamics.
+
+**New Project Ideas:**
+1) Adaptive Interpolation Algorithm:
+Develop an adaptive algorithm that dynamically adjusts interpolation based on pace variability detected from non-GPS sensors.
+
+2) Machine Learning for GPS Anomaly Correction:
+Integrate machine learning techniques to predict and correct GPS anomalies, offering a more robust solution for accurate race tracking.
 
 ### Licence
 
@@ -229,4 +217,4 @@ If you have any questions or comments about the project, or if you're interested
 - **Email**: emiliosmrichards@gmail.com
 - **GitHub Profile**: [EmiliosRichards](https://github.com/EmiliosRichards)
 
-Gif bye
+![Bye!](/Files/wavebye.png)
