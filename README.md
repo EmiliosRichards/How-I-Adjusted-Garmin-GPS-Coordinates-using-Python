@@ -216,7 +216,7 @@ This project is licensed under the MIT License - see the [LICENSE](/LICENSE) fil
 
 ### Contact Information
 
-If you have any questions or comments about the project, or if you're interested in contributing, feel free to reach out:
+If you have any questions or comments about the project, if you find any broken links/ errata, or if you're interested in contributing, feel free to reach out:
 
 - **Project Maintainer**: Emilios Richards
 - **Email**: emiliosmrichards@gmail.com
