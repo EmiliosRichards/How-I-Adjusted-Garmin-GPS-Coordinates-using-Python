@@ -212,7 +212,7 @@ Thank you for reading this document! It was an enjoyable experience creating thi
 
 ### Licence
 
-This project is licensed under the MIT License - see the ![LICENSE](/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](/LICENSE) file for details.
 
 ### Contact Information
 
