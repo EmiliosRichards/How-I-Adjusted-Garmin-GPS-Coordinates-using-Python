@@ -21,7 +21,7 @@ Welcome! The following document details of a small project working with XML, Int
 
 # Introduction 
 
-To provide some context, from childhood I've relished participating in a variety of sports and I've maintained that same keen interest throughout my life. Over the years, what began as an enjoyable hobby, developed into one of my core values. My most recent focus is running. Some may see running as burdensome, and albeit challenging for me at times, I see it as an healthy escape from the hustle and bustle of life. The art of running is a classic. As a child, running comes naturally, its beauty lies in its simplicity. By putting one foot in front of the other, we experience one our most natural movements. Running is among the best investments one can make for their body and mind. As with most of my hobbies, I found great satisfaction in quantifying my progress and seeking ways to improve my ability level. Heartrate and Distance were metrics I soon began to observe. This was made easy by utilizing Garmin's Fenix Multisport GPS watch and their accompanying platform Garmin Connect. The Fenix encompasses a broad range of features and capabilities, all aimed at measuring essential workout metrics, including Heart-Rate Monitoring, GPS tracking, recovery insights and much more. Garmin Connect on the other hand, is a platform capable for holding data and providing a holistic overview of progress through an intuituve interface. Its main uses include visualising the geographical rounts taken and gaining valuable insight through workout monitoring.
+To provide some context, from childhood I've relished participating in a variety of sports and I've maintained that same keen interest throughout my life. Over the years, what began as an enjoyable hobby, developed into one of my core values. My most recent focus is running. Some may see running as burdensome, and albeit challenging for me at times, I see it as an healthy escape from the hustle and bustle of life. The art of running is a classic. As a child, running comes naturally, its beauty lies in its simplicity. By putting one foot in front of the other, we experience one our most natural movements. Running is among the best investments one can make for their body and mind. As with most of my hobbies, I found great satisfaction in quantifying my progress and seeking ways to improve my ability level. Heartrate and Distance were metrics I soon began to observe. This was made easy by utilizing Garmin's Fenix Multisport GPS watch and their accompanying platform Garmin Connect. The Fenix encompasses a broad range of features and capabilities, all aimed at measuring essential workout metrics, including Heart-Rate Monitoring, GPS tracking, recovery insights and much more. Garmin Connect on the other hand, is a platform capable for holding data and providing a holistic overview of progress through an intuituve interface. Its main uses include visualising the geographical routes taken and gaining valuable insight through workout monitoring.
 
 The Garmin Fenix is a great watch and I love the ergonomical design, however there was a giant issue that I soon encountered. The GPS feature produced perculiar results. Not only was the map visual misaligned, the distance metric was incorrect. Was there something wrong with the Garmin Watch? No, but I wasn't suprised. If you live Cyprus, as I do, or have travelled through the Mediterranean, Baltic, and Middle-Eastern regions recently, you may have experienced something similar. It will come at no shock that the GPS discrepencies are no fault of brand or model. The problem stems from a much deeper issue: electronic warfare and our spatial proximity to the Middle-Eastern region. The geopolitical conflict in this area has resulted in GPS and satellite signal disruptions and many areas of life are being affected. To outline a few: flight navigation and air traffic control have reverted to traditional navigation methods. This costs them time and money. Delays are also being experienced by emergency serives such as Ambulances, Police and Fire-Services. For the general public, popular navigation methods such as Google Maps are suffering. This causes finacial implication to relevent industries and psycological strain to the general public. I bring forward my experience within this document not to diminish what is going on around us, but instead to bring light to a comparitively small, yet very real conscequence of the ongoing conflict. With that being said, I was determined to reconcile the problem I was facing. 
 
@@ -31,7 +31,7 @@ Due to the GPS interference, the incorrect coordinates it produced had serveral 
 
 1) An inaccuracy of distance; for example - A 10k run may show up as 7k or at times even 0.7k. 
 
-2) The skewed variables rendered the insights gained through Garmin Connect ineffective and therefore the accumulated data that aids ones progress was non-existant. 
+2) The skewed variables rendered the insights gained through Garmin Connect ineffective and therefore the accumulated data, which aids in ones progress, non-existant. 
 
 3) The maps looked choatic, much like if you employed a toddler to draw their finest scribble on a map.
 
@@ -44,7 +44,7 @@ Being unable to view the route you ran is admittedly annoying. But, of the three
 
 ## Thought process No.1
 
-Can I manually adjust the map, in a drag and drop fashion - similiar to https://onthegomap.com/#/create's "How far did I run?" - to fix all these issues? Unfortunately adjusting the coordinates in this way is not supported by Garmin directly, I also attempted to use Golden Cheetah but with no success. Yet effort to resolve my issue in this way did not go to waste, as it was through the process of downloading workout data from Garmin - in order to upload it to the Golden Cheetah application - that I discovered Garmin's XML equivalent file type, TCX (Training Center XML). 
+Can I manually adjust the map, in a drag and drop fashion - similiar to https://onthegomap.com/#/create "How far did I run?" - to fix all these issues? Unfortunately adjusting the coordinates in this way is not supported by Garmin directly, I also attempted to use Golden Cheetah but with no success. Yet effort to resolve my issue in this way did not go to waste, as it was through the process of downloading workout data from Garmin - in order to upload it to the Golden Cheetah application - that I discovered Garmin's XML equivalent file type, TCX (Training Center XML). 
 
 Garmin's Available File Formats for Download: 
 
@@ -53,7 +53,6 @@ Garmin's Available File Formats for Download:
 ## Thought Process No.2
 
 My new goal was simple: 1) Download the XML file and locate the affected data points, 2) create data that reflects the corrected coordinates, 3) re-upload. It sounded simple enough. Then it dawned on me, with 1000's of data points to modify, doing this line by line would be tedious and not worth the effort. But, I had a great idea! A Python script could make short work of this repetitive task. 
-
 
 To give you an idea of what the file looks like, here is as snippet: 
 
@@ -71,9 +70,9 @@ This is an example of what some of the downloaded cordinates look like:
 
 ## Automated Coordinate Generator
 
-As distinct from a circular route, the run followed what you wouuld call an out-and-back route, starting from a desired location, travelling to a midway checkpoint, followed by retracing your steps and eventually finishing where you started. Therefore my data points only represented half of the route and I had to add a reversed set of the coordinates to the end. To save time I used python. To view the code in its entirety click - or right click to open tab - the following link: [Out and Back Data Reversing py File](src/outandback-reverse.py)
+As I didn't run in a loop, the run followed what you would call an 'out-and-back' route. Simply put, I ran to a midway point and then ran back, retracing my steps. Therefore my new coordinate data points only represented half of the route and I had to append a reversed set of the coordinates to the end of the original set, hense simulating the out-and-back path I had taken. To save time I used python. To view the code in its entirety click - or right click to open tab - the following link: [Out and Back Data Reversing Python File](src/outandback-reverse.py)
 
-The following is a Portion of the File with Narritive Comments:
+The following is a portion of the file with narrative comments:
 
 ```python
 # Define input and output file names
@@ -100,16 +99,16 @@ print(f"Combined original and reversed records written to {output_file}")
 
 ## A Mismatch in Data Points
 
-With my Out and Back Coordinates saved in a handy Tab-Separated-Value file I was almost ready to start replacing my TCX File coordinates. However there was one small discrepency. When plannning my route and extracting the corrected cordinates, I simply droped markers at every turning point and took little notice to the distances between each marker, additionally the total number of paired Latitude and Longitude coordinates - including the reversed set - amounted to 87. The discrepency appears once you consider, during a workout a Garmin watch records data every second, with each second represented as a single Trackpoint within a TCX file. In consequence a thirty minute workout produces 1800 Trackpoints. Since each trackpoint contains metrics like Distance, Latitude, and Longitude; and every Trackpoint needed modification, I had to interpolate my 87 coordinates. 
+With my out-and-back Coordinates saved in a handy TSV (Tab-Separated-Value) file, I was almost ready to start replacing my TCX File coordinates. However, there was one small discrepency. When plannning my route and extracting the corrected cordinates, I simply droped markers at every turning point and took little notice to the distances between each marker. Additionally, the total number of paired latitude and longitude coordinates - including the reversed set - amounted to 87. The discrepency appears once you consider that during a workout a Garmin watch is recording data every second. Each second is represented as a single trackpoint within a TCX file. In consequence a thirty minute workout produces 1800 trackpoints (60 x 30). Since each trackpoint contains metrics like distance, latitude, and longitude; and every trackpoint needed modification, I had to interpolate my 87 coordinates. 
 
-I will not cover the Code I used to calculate the number of Trackpoints within a TCX in the document, however if you would like to view the Python script click - right click to open in new tab - this link: [Count Trackpoints Code](src/count-trackpoints.py)
+I will not cover the code I used to calculate the number of trackpoints within a TCX in this document, however if you would like to view the Python script click - right click to open in new tab - this link: [Count Trackpoints Code](src/count-trackpoints.py)
 
 
 ## Interpolation
 
-In order to interpolate the newly generated precise coordinates - so they amount to the sum total trackpoints (measured in the previous script) - and to ensure they are equally spaced, I used the following python script. To view the code in its entirety click the link: ![Data-Interpolation](src/data-interpolation.py)
+In order to interpolate the newly generated precise coordinates - so they amount to the sum total trackpoints (measured in the previous script) - and to ensure they are equally spaced, I used the following Python script. To view the code in its entirety click the link: [Data-Interpolation](src/data-interpolation.py)
 
-Here is a higher-level overview with narritive comments:
+Here is a higher-level overview with narrative comments:
 
 ```python 
 import pandas as pd
@@ -144,9 +143,9 @@ resampled_data.to_csv(folder / 'resampled_coordinates.txt', index=False, sep='\t
 
 ## Parse and Replace
 
-At this point, I have my /Data/resampled_coordinates.txt file - a TSV file containing 1800 equally distanced coordinates - accurately representing my morning-run. All I had to do, was parse the original TCX file and replace each Latitude, Longitude, and DistanceMeters variable. To acheive this, I used the following Python code. Click the link to view it in its entirety: ![Parse and Replace](src/parse-and-replace.py)
+At this point, I have my /Data/resampled_coordinates.txt file - a TSV file containing 1800 equally distanced coordinates - accurately representing my morning run. Next I needed to parse the original TCX file and replace each Latitude, Longitude, and DistanceMeters variable. To acheive this, I used the following Python code. Click the link to view it in its entirety: [Parse and Replace](src/parse-and-replace.py)
 
-Here is a higher-level overview with narritive comments:
+Here is a higher-level overview with narrative comments:
 
 ```python
 # Import Libaries***
@@ -187,12 +186,12 @@ Here is the Result:
 
 ## Limitations
 
-Although this is a decent work around for GPS disruptions affecting Garmin measurements, I thought it was best to mention that this is by no means a perfect solution. When inerpolating our new coordinates I casually brushed past the fact that this system equally spaces the distance of each data point. No race is run at an invariable pace, therefore the various metrics can not perfectly align with its corresponding location perfectly. There are ways of eliminating inconsitences however, such as using checkpoints to compartmentilise (segment?) the followed course, or using Garmin's non-GPS in built distance and pace measurements to calculate distances, providing a far more realistic distrubution. This will be discussed further in the future work section, aimed at improving the accuracy of this system. 
+Although this is a successful solution for GPS disruptions affecting Garmin measurements, I thought it was best to mention that this is by no means a perfect solution. When interpolating the new coordinates I was aware that this system equally spaces the distance of each data point. This assumes that the runner is running at a constant pace. Since this is unlikely, the various metrics will not perfectly align with their corresponding location. However ways of eliminating inconsitences, such as using checkpoints to segment the followed course or using Garmin's non-GPS distance and pace measurements to provide a far more realistic distrubution, will be discussed further in the future work section.
 
 
 ## Summary 
 
-From what started out as a poor endorsememt unjustly made against Garmin products (I still love their watches), to a conflict driven ripple-affect felt globaly, this small project provided an opportunity for deeper learning. By utilising libraries: geopy, pandas, and lxml; this system provides a viable solution to a real-life problem. We created new data, resampling it to the desired sum total and appropriately formatting; next we modified an existing TCX file, adapting several data points using our new data; the end result produced a accurate rendering of the workout activity, hosted on Garmin Connect. The process of creating such a system also demonstrates the versitility of python and its supporting libraries, viable for numerous tasks and processes. My personal growth manifests itself in deeper understanding of XLM files, GPS coodinates + supporting library geopy, and resampling methods. Going forward, whether facing industry specific or personal obstacles, I hope this project serves as a reminder to myself and similiar others that Python has great potential for improving workflows and everyday life. 
+From what started out as an attack unjustly made against Garmin products (I still love their watches), to a conflict driven ripple-affect felt globaly, this small project provided an opportunity for deeper learning. By utilising libraries: geopy, pandas, and lxml; this system provides a viable solution to a real-life problem. I created new data, resampling it to the desired sum total and appropriate formatting; next we modified an existing TCX file, adapting several data points using our new data. The end result was an accurate rendering of the workout activity, hosted on Garmin Connect. The process of creating such a system also demonstrates the versitility of Python and its supporting libraries, which are viable for numerous tasks and processes. My personal growth manifests itself in a deeper understanding of XLM files, GPS coodinates and geopy, and resampling methods. Going forward, whether facing industry specific or personal obstacles, I hope this project serves as a reminder to myself and others that Python has great potential for improving everyday life. 
 
 
 ## Future Work
@@ -209,7 +208,7 @@ Integrate machine learning techniques to predict and correct GPS anomalies, offe
 
 ## Conclusion
 
-Thank you for reading this document! It was an enjoyable experience creating this system, I hope you can take away some value from it. I learnt a lot from the process, so at I least hope it encourages you to try coding something new. If you do, share it with me! Lastly, any feedback is welcome, my contacts are below. Thank you again and I will see you guys in the next one! Have a great weekend!
+Thank you for reading this document! It was an enjoyable experience creating this system, I hope you can take away some value from it. I learnt a lot from the process, so I at least hope it encourages you to try coding something new. If you do, share it with me! Lastly, any feedback is welcome, my contact information is below. Thank you again and I will see you guys in the next one! Have a great weekend!
 
 ### Licence
 
